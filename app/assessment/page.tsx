@@ -36,10 +36,122 @@ const assessmentQuestions = [
   },
 ];
 
+const careerTransitionJourneys = {
+  "Manual QA Engineer|AI-Augmented QA Strategist|Beginner": {
+    readinessScore: 62,
+    summary:
+      "Focus on using AI to strengthen test planning, risk analysis, and communication before adding technical depth.",
+    firstStep: "Practice turning product requirements into AI-assisted test scenarios.",
+  },
+  "Manual QA Engineer|AI-Augmented QA Strategist|Intermediate": {
+    readinessScore: 74,
+    summary:
+      "Build on your QA judgment by adding AI-supported strategy, release risk reviews, and stakeholder-ready summaries.",
+    firstStep: "Create a reusable prompt workflow for regression planning.",
+  },
+  "Manual QA Engineer|AI-Augmented QA Strategist|Advanced": {
+    readinessScore: 82,
+    summary:
+      "Move toward quality leadership by combining strong QA context with AI-driven decision support.",
+    firstStep: "Design an AI-assisted quality dashboard for a sample release.",
+  },
+  "Manual QA Engineer|AI-Assisted Test Automation Specialist|Beginner": {
+    readinessScore: 55,
+    summary:
+      "Start with coding fundamentals while using AI to explain scripts, selectors, and automation patterns.",
+    firstStep: "Automate one simple smoke test with AI guidance.",
+  },
+  "Manual QA Engineer|AI-Assisted Test Automation Specialist|Intermediate": {
+    readinessScore: 68,
+    summary:
+      "Pair your QA experience with automation practice and AI-assisted test maintenance workflows.",
+    firstStep: "Refactor a brittle test case using AI-generated suggestions.",
+  },
+  "Manual QA Engineer|AI-Assisted Test Automation Specialist|Advanced": {
+    readinessScore: 78,
+    summary:
+      "You can move quickly toward AI-assisted automation by building reusable patterns and test utilities.",
+    firstStep: "Build a small automation suite and document the AI-assisted workflow.",
+  },
+  "Test Automation Engineer|AI-Augmented QA Strategist|Beginner": {
+    readinessScore: 66,
+    summary:
+      "Use your automation background as a base while improving AI literacy and strategic quality planning.",
+    firstStep: "Use AI to summarize automation results into product risk insights.",
+  },
+  "Test Automation Engineer|AI-Augmented QA Strategist|Intermediate": {
+    readinessScore: 80,
+    summary:
+      "Shift from execution to strategy by applying AI to coverage analysis, risk prioritization, and release planning.",
+    firstStep: "Create an AI-assisted test coverage review for a feature release.",
+  },
+  "Test Automation Engineer|AI-Augmented QA Strategist|Advanced": {
+    readinessScore: 88,
+    summary:
+      "You are well positioned to lead AI-enabled quality strategy across automation, analytics, and release readiness.",
+    firstStep: "Prototype an AI-assisted quality review playbook.",
+  },
+  "Test Automation Engineer|AI-Assisted Test Automation Specialist|Beginner": {
+    readinessScore: 70,
+    summary:
+      "Strengthen your automation foundation by using AI to explain code, generate test ideas, and debug failures.",
+    firstStep: "Use AI to analyze and improve one flaky automated test.",
+  },
+  "Test Automation Engineer|AI-Assisted Test Automation Specialist|Intermediate": {
+    readinessScore: 84,
+    summary:
+      "Advance into AI-assisted automation by improving test design speed, maintenance, and framework productivity.",
+    firstStep: "Create prompt templates for generating and reviewing test scripts.",
+  },
+  "Test Automation Engineer|AI-Assisted Test Automation Specialist|Advanced": {
+    readinessScore: 92,
+    summary:
+      "You are ready to specialize in AI-assisted automation architecture, tooling, and productivity workflows.",
+    firstStep: "Build a reusable AI-assisted automation workflow for a sample app.",
+  },
+};
+
+function getJourneyKey(
+  currentRole: string,
+  targetRole: string,
+  codingConfidence: string,
+) {
+  return `${currentRole}|${targetRole}|${codingConfidence}`;
+}
+
+function getDashboardHref(
+  currentRole: string,
+  targetRole: string,
+  codingConfidence: string,
+) {
+  const params = new URLSearchParams();
+
+  if (currentRole) {
+    params.set("currentRole", currentRole);
+  }
+
+  if (targetRole) {
+    params.set("targetRole", targetRole);
+  }
+
+  if (codingConfidence) {
+    params.set("codingConfidence", codingConfidence);
+  }
+
+  const query = params.toString();
+
+  return query ? `/dashboard?${query}` : "/dashboard";
+}
+
 export default function AssessmentPage() {
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedTargetRole, setSelectedTargetRole] = useState("");
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const codingConfidence = answers.codingConfidence || "";
+  const selectedJourney =
+    careerTransitionJourneys[
+      getJourneyKey(selectedRole, selectedTargetRole, codingConfidence) as keyof typeof careerTransitionJourneys
+    ];
 
   return (
     <main className="min-h-screen bg-slate-50 p-6 text-slate-950">
@@ -128,7 +240,12 @@ export default function AssessmentPage() {
         </div>
 
         <Link
-          href="/dashboard"
+          href={getDashboardHref(
+            selectedRole,
+            selectedTargetRole,
+            codingConfidence,
+          )}
+          title={selectedJourney?.summary}
           className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-slate-950 px-6 text-base font-semibold text-white transition hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-100 sm:w-auto"
         >
           Craft My Journey
