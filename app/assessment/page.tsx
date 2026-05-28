@@ -32,7 +32,7 @@ const assessmentQuestions = [
   {
     id: "yearsOfExperience",
     label: "Years of experience",
-    options: ["0-2 years", "3-5 years", "6+ years"],
+    options: ["5-10 years", "10-15 years", "15-20 years", "20-30 years"],
   },
 ];
 
