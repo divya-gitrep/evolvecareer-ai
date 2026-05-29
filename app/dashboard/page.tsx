@@ -201,13 +201,15 @@ export default async function DashboardPage({
   const missionSimulation = getMissionSimulation(targetRole);
 
   return (
-    <main className="min-h-screen bg-slate-50 p-6 text-slate-950">
-      <section className="mx-auto flex min-h-screen max-w-4xl items-center">
-        <div className="w-full rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="text-sm font-medium text-teal-700">Dashboard</p>
-          <div className="mt-3 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f8fafc_0%,#eefdf8_48%,#f8fafc_100%)] p-5 text-slate-950 sm:p-8">
+      <section className="mx-auto flex min-h-screen max-w-5xl items-center py-8">
+        <div className="w-full rounded-lg border border-white/80 bg-white/95 p-5 shadow-xl shadow-slate-200/70 ring-1 ring-slate-100 sm:p-8">
+          <p className="inline-flex rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-700">
+            Dashboard
+          </p>
+          <div className="mt-5 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="text-2xl font-semibold sm:text-3xl">
+              <h1 className="text-3xl font-semibold tracking-normal sm:text-4xl">
                 AI Readiness Score
               </h1>
               <p className="mt-2 max-w-xl leading-7 text-slate-600">
@@ -215,27 +217,29 @@ export default async function DashboardPage({
                 {` ${codingConfidence.toLowerCase()} coding confidence.`}
               </p>
             </div>
-            <div className="text-5xl font-semibold text-slate-950">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 text-5xl font-semibold text-slate-950 shadow-sm">
               {readinessScore}%
             </div>
           </div>
 
           <div className="mt-8">
-            <div className="h-4 overflow-hidden rounded-full bg-slate-100">
+            <div className="h-4 overflow-hidden rounded-full bg-slate-100 shadow-inner">
               <div
-                className="h-full rounded-full bg-teal-600"
+                className="h-full rounded-full bg-gradient-to-r from-teal-600 via-emerald-500 to-cyan-500 shadow-sm"
                 style={{ width: `${readinessScore}%` }}
               />
             </div>
           </div>
 
           <div className="mt-8">
-            <h2 className="text-lg font-semibold">Strengths</h2>
+            <h2 className="text-lg font-semibold text-slate-950">
+              Strengths
+            </h2>
             <ul className="mt-4 grid gap-3 sm:grid-cols-3">
               {strengths.map((strength) => (
                 <li
                   key={strength}
-                  className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700"
+                  className="rounded-lg border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 text-sm leading-6 text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-md"
                 >
                   {strength}
                 </li>
@@ -244,10 +248,12 @@ export default async function DashboardPage({
           </div>
 
           <div className="mt-8">
-            <h2 className="text-lg font-semibold">Skill Gap</h2>
-            <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200">
+            <h2 className="text-lg font-semibold text-slate-950">
+              Skill Gap
+            </h2>
+            <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
               <table className="w-full min-w-[520px] border-collapse text-left text-sm">
-                <thead className="bg-slate-50 text-slate-600">
+                <thead className="bg-slate-100/80 text-slate-600">
                   <tr>
                     <th className="px-4 py-3 font-semibold">Skill</th>
                     <th className="px-4 py-3 font-semibold">Current level</th>
@@ -256,7 +262,7 @@ export default async function DashboardPage({
                 </thead>
                 <tbody className="divide-y divide-slate-200">
                   {skillGaps.map((gap) => (
-                    <tr key={gap.skill}>
+                    <tr key={gap.skill} className="transition hover:bg-teal-50/60">
                       <td className="px-4 py-3 font-medium text-slate-900">
                         {gap.skill}
                       </td>
@@ -274,14 +280,16 @@ export default async function DashboardPage({
           </div>
 
           <div className="mt-8">
-            <h2 className="text-lg font-semibold">30-Day Roadmap</h2>
+            <h2 className="text-lg font-semibold text-slate-950">
+              30-Day Roadmap
+            </h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {roadmap.map((item) => (
                 <div
                   key={item.week}
-                  className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+                  className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-md"
                 >
-                  <p className="text-sm font-semibold text-teal-700">
+                  <p className="inline-flex rounded-full bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-700">
                     {item.week}
                   </p>
                   <h3 className="mt-2 font-semibold text-slate-950">
@@ -295,21 +303,21 @@ export default async function DashboardPage({
             </div>
           </div>
 
-          <div className="mt-8 rounded-lg border border-slate-200 bg-slate-50 p-5">
-            <p className="text-sm font-semibold text-teal-700">
+          <div className="mt-8 rounded-lg border border-teal-100 bg-gradient-to-br from-slate-50 via-white to-teal-50 p-5 shadow-sm">
+            <p className="inline-flex rounded-full bg-white px-3 py-1 text-sm font-semibold text-teal-700 shadow-sm">
               Mission Simulation
             </p>
             <h2 className="mt-2 text-xl font-semibold text-slate-950">
               {missionSimulation.scenarioTitle}
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-slate-200 bg-white p-4">
+              <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:border-teal-200 hover:shadow-md">
                 <h3 className="font-semibold text-slate-900">Challenge</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">
                   {missionSimulation.challenge}
                 </p>
               </div>
-              <div className="rounded-lg border border-teal-100 bg-white p-4">
+              <div className="rounded-lg border border-teal-100 bg-white p-4 shadow-sm transition hover:border-teal-300 hover:shadow-md">
                 <h3 className="font-semibold text-slate-900">
                   Recommended action
                 </h3>
@@ -322,7 +330,7 @@ export default async function DashboardPage({
 
           <Link
             href="/progress"
-            className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-slate-950 px-6 text-base font-semibold text-white transition hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-100 sm:w-auto"
+            className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-slate-950 px-6 text-base font-semibold text-white shadow-lg shadow-slate-300/70 transition hover:-translate-y-0.5 hover:bg-teal-700 hover:shadow-teal-200 focus:outline-none focus:ring-4 focus:ring-teal-100 sm:w-auto"
           >
             Track Your Progress
           </Link>

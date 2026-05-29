@@ -63,13 +63,13 @@ export default function ProgressPage() {
   )?.title;
 
   return (
-    <main className="min-h-screen bg-slate-50 p-6 text-slate-950">
-      <section className="mx-auto max-w-4xl py-10">
-        <header className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="text-sm font-medium text-teal-700">
+    <main className="min-h-screen bg-[linear-gradient(180deg,#f8fafc_0%,#eff6ff_42%,#f0fdfa_100%)] p-5 text-slate-950 sm:p-8">
+      <section className="mx-auto max-w-5xl py-8 sm:py-10">
+        <header className="rounded-lg border border-white/80 bg-white/95 p-6 shadow-xl shadow-slate-200/70 ring-1 ring-slate-100 sm:p-8">
+          <p className="inline-flex rounded-full border border-teal-100 bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-700">
             Progress Tracker
           </p>
-          <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-semibold tracking-normal sm:text-4xl">
             Your AI Transition Progress
           </h1>
           <p className="mt-3 max-w-2xl leading-7 text-slate-600">
@@ -78,8 +78,20 @@ export default function ProgressPage() {
           </p>
         </header>
 
-        <section className="mt-6 rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-xl font-semibold">Weekly Progress Tracker</h2>
+        <section className="mt-6 rounded-lg border border-white/80 bg-white/95 p-6 shadow-lg shadow-slate-200/60 ring-1 ring-slate-100 sm:p-8">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-teal-700">
+                Weekly Growth
+              </p>
+              <h2 className="mt-1 text-xl font-semibold">
+                Weekly Progress Tracker
+              </h2>
+            </div>
+            <span className="w-fit rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-600">
+              {completedWeeks.size} of {weeklyProgress.length} complete
+            </span>
+          </div>
           <div className="mt-5 space-y-4">
             {weeklyProgress.map((week) => {
               const isCompleted = completedWeeks.has(week.id);
@@ -87,7 +99,11 @@ export default function ProgressPage() {
               return (
                 <article
                   key={week.id}
-                  className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+                  className={`rounded-lg border p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+                    isCompleted
+                      ? "border-teal-200 bg-gradient-to-br from-teal-50 via-white to-emerald-50"
+                      : "border-slate-200 bg-white hover:border-teal-200"
+                  }`}
                 >
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <label className="flex cursor-pointer items-start gap-3">
@@ -109,10 +125,10 @@ export default function ProgressPage() {
 
                     {isCompleted ? (
                       <div className="flex shrink-0 flex-wrap gap-2">
-                        <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700">
+                        <span className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700">
                           Completed
                         </span>
-                        <span className="rounded-full bg-teal-50 px-3 py-1 text-sm font-medium text-teal-700">
+                        <span className="rounded-full bg-teal-100 px-3 py-1 text-sm font-semibold text-teal-700">
                           Badge Earned
                         </span>
                       </div>
@@ -124,26 +140,29 @@ export default function ProgressPage() {
           </div>
         </section>
 
-        <section className="mt-6 rounded-lg border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-xl font-semibold">
+        <section className="mt-6 rounded-lg border border-white/80 bg-white/95 p-6 shadow-lg shadow-slate-200/60 ring-1 ring-slate-100 sm:p-8">
+          <p className="text-sm font-semibold text-teal-700">
+            Simulation Wins
+          </p>
+          <h2 className="mt-1 text-xl font-semibold">
             Mission Simulation Tracker
           </h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {simulationMissions.map((mission) => (
               <article
                 key={mission.id}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-4"
+                className="rounded-lg border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-md"
               >
                 <h3 className="font-semibold text-slate-950">
                   {mission.title}
                 </h3>
-                <p className="mt-2 text-sm font-medium text-emerald-700">
+                <p className="mt-3 inline-flex rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700">
                   {mission.status}
                 </p>
                 <button
                   type="button"
                   onClick={() => setSharedMission(mission.id)}
-                  className="mt-4 inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-800 transition hover:border-teal-300 hover:text-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-100"
+                  className="mt-4 inline-flex h-10 items-center justify-center rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:text-teal-700 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-teal-100"
                 >
                   Share Achievement
                 </button>
@@ -153,11 +172,11 @@ export default function ProgressPage() {
         </section>
 
         {sharedMissionTitle ? (
-          <section className="mt-6 rounded-lg border border-teal-200 bg-white p-6 shadow-sm sm:p-8">
-            <p className="text-sm font-semibold text-teal-700">
+          <section className="mt-6 rounded-lg border border-teal-200 bg-white/95 p-6 shadow-lg shadow-teal-100/70 ring-1 ring-teal-50 sm:p-8">
+            <p className="inline-flex rounded-full bg-teal-50 px-3 py-1 text-sm font-semibold text-teal-700">
               Mock share message
             </p>
-            <p className="mt-3 rounded-lg bg-slate-50 p-4 leading-7 text-slate-700">
+            <p className="mt-4 rounded-lg border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 leading-7 text-slate-700">
               I completed the {sharedMissionTitle} mission on EvolveCareer AI
               and took another step toward my AI-enabled QA career transition.
             </p>
