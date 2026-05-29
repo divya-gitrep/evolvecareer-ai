@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type DashboardSearchParams = {
   currentRole?: string | string[];
   targetRole?: string | string[];
@@ -317,6 +319,13 @@ export default async function DashboardPage({
               </div>
             </div>
           </div>
+
+          <Link
+            href="/progress"
+            className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-lg bg-slate-950 px-6 text-base font-semibold text-white transition hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-100 sm:w-auto"
+          >
+            Track Your Progress
+          </Link>
         </div>
       </section>
     </main>
