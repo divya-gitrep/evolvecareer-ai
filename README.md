@@ -161,11 +161,11 @@ http://localhost:3000
 
 ## Live Demo
 
-https://evolvecareer-ai.vercel.app/
+https://lnkd.in/gAMJH4SP
 
 ## GitHub Repository
 
-https://github.com/divya-gitrep/evolvecareer-ai.git
+https://lnkd.in/gfxvJepF
 
 ## Feedback
 
